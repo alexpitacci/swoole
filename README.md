@@ -1,6 +1,6 @@
-# Graphql + Swoole
+# GraphQL + Swoole
 
-## Using Swoole to respond as graphql
+## Using Swoole and GraphQL
 
 Clone this directory
 
