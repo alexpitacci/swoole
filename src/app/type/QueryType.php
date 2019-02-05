@@ -2,9 +2,12 @@
 
 namespace App\Type;
 
+require 'bootstrap.php';
+
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\ResolveInfo;
 use App\Types;
+use App\Datasource;
 
 class QueryType extends ObjectType {
 
@@ -26,8 +29,8 @@ class QueryType extends ObjectType {
     }
 
     public function products($rootValue, $args) {
-        require 'bootstrap.php';
-        $productRepository = $entityManager->getRepository('Product');
+
+        $productRepository = Datasource::em()->getRepository('Product');
         $products = $productRepository->findAll();
         var_dump($products);
         return $products;
