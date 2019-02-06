@@ -10,16 +10,17 @@ class HomeGraphql {
     public static function run($data) {
 
         $schema = new Schema([
-            'query' => Types::query()
+            'query' => Types::query(),
+            'mutation' => Types::mutation()
         ]);
-        
+
         //$rawInput = file_get_contents('php://input');
         //$input = json_decode($rawInput, true);
         $input = json_decode($data, true);
-        
+
         $query = $input['query'];
         $variableValues = isset($input['variables']) ? $input['variables'] : null;
-        
+
         try {
             $rootValue = ['prefix' => 'You said: '];
             $result = GraphQL::executeQuery($schema, $query, $rootValue, null, $variableValues);
@@ -33,7 +34,7 @@ class HomeGraphql {
                 ]
             ];
         }
-        
+
         return json_encode($output);
     }
 }

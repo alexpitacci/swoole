@@ -1,10 +1,9 @@
 <?php
-require_once __DIR__ . '/vendor/autoload.php';
-require "bootstrap.php";
+require_once 'vendor/autoload.php';
 
 use Swoole\Http\Response;
 use Swoole\Http\Server;
-use App\HomeGraphql; 
+use App\HomeGraphql;
 
 $http = new Server('0.0.0.0', 9501);
 $http->set([

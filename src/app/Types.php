@@ -6,11 +6,15 @@ use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Definition\ListOfType;
 use App\Type\QueryType;
 use App\Type\ProductType;
+use App\Type\ProductInputType;
+use App\Type\MutationType;
 
 class Types {
 
     private static $product;
+    private static $productInput;
     private static $query;
+    private static $mutation;
 
     /**
      * @return ProductType
@@ -21,28 +25,11 @@ class Types {
     }
 
     /**
-     * @return \GraphQL\Type\Definition\IDType
+     * @return ProductInputType
      */
-    public static function id()
+    public static function productInput()
     {
-        return Type::id();
-    }
-
-    /**
-     * @return \GraphQL\Type\Definition\StringType
-     */
-    public static function string()
-    {
-        return Type::string();
-    }
-
-    /**
-     * @param Type $type
-     * @return ListOfType
-     */
-    public static function listOf($type)
-    {
-        return new ListOfType($type);
+        return self::$productInput ?: (self::$productInput = new ProductInputType());
     }
 
     /**
@@ -51,6 +38,14 @@ class Types {
     public static function query()
     {
         return self::$query ?: (self::$query = new QueryType());
+    }
+
+    /**
+     * @return MutatitonType
+     */
+    public static function mutation()
+    {
+        return self::$mutation ?: (self::$mutation = new MutationType());
     }
 
 }
