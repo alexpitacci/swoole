@@ -6,8 +6,7 @@ use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\ResolveInfo;
 use App\Types;
-use App\Datasource;
-use App\Entity\Product;
+use App\Entities\Product;
 
 class MutationType extends ObjectType {
 
@@ -31,10 +30,12 @@ class MutationType extends ObjectType {
     }
 
     public function createProduct($val, $args) {
-      $ds = new Datasource();
+
       $obj = (object) $args['product'];
-      $id = $ds->insert("INSERT INTO `SWOOLE`.`products` (`name`) VALUES ('{$obj->name}')");
-      $product = $ds->select("SELECT * FROM `SWOOLE`.`products` WHERE `id` = {$id}");
-      return $product[0];
+      $product = new Product();
+      $product->name = $obj->name;
+      $product->save();
+
+      return $product;
     }
 }

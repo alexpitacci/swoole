@@ -11,7 +11,7 @@ services:
     image: phpmyadmin/phpmyadmin
     restart: always
     ports:
-      - 8080:80
+      - 8880:80
   app:
     build:
       context: ./

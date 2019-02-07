@@ -7,6 +7,7 @@ use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\ResolveInfo;
 use App\Types;
 use App\Datasource;
+use App\Entities\Product;
 
 class QueryType extends ObjectType {
 
@@ -28,8 +29,7 @@ class QueryType extends ObjectType {
     }
 
     public function products($rootValue, $args) {
-        $ds = new Datasource();
-        $products = $ds->select('select * from products');
-        return $products;
+        $products = new Product();
+        return $products->findAll();
     }
 }
